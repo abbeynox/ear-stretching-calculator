@@ -49,7 +49,7 @@ time_needed=$((($stretch_size - $current_size) * $step_time))
 num_steps=$((($stretch_size - $current_size) / 2))
 
 current_date=$(date +%s)
-estimated_date=$(date -d "@$((current_date + time_needed))" +%d.%b\ %Y)
+estimated_end_date=$(date -d "@$((current_date + time_in_weeks * 7 * 24 * 60 * 60))" +%d.%b\ %Y)
 
 if [ "$current_size" -eq 0 ]; then
   time_in_weeks=$(( $num_steps * 4 + 4 ))
@@ -63,8 +63,7 @@ if (( time_in_weeks > 52 )); then
 else
   echo -e "Geschätzte Zeit: ~$time_in_weeks Woche(n)"
 fi
-echo -e "Geschätztes Datum: $estimated_date"
-echo
+echo -e "Geschätztes Enddatum: $estimated_end_date"
 echo -e "Anzahl der Dehnschritte: $num_steps"
 
 for (( i=1; i<=$num_steps; i++ ))
@@ -77,6 +76,6 @@ do
   fi
 
   step_date=$(date -d "@$((current_date + step_time_needed))" +%d.%b\ %Y)
-  echo -e "\033[34mDehnschritt $i ($step_size mm): $step_date \U1F449\033[0m"
+  echo -e "\033[34m$i. Dehnschritt ($step_size mm): $step_date \U1F449\033[0m"
 done
 
