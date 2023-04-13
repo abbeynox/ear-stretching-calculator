@@ -8,14 +8,38 @@ else
 fi
 
 if [[ $stretch_size =~ ^[0-9]+mm$ ]]; then
-  # Stretching-Größe in Millimeter extrahieren
   stretch_size=$(echo $stretch_size | tr -dc '0-9')
+fi
+
+if (( stretch_size < 2 || stretch_size > 50 )); then
+  echo -e "\033[31mDie Stretching-Grösse muss zwischen 2 und 50 liegen. \U1F644\033[0m"
+  exit 1
 fi
 
 current_size=$2
 
 if [ -z "$current_size" ]; then
   current_size=0
+fi
+
+if [[ $current_size =~ ^[0-9]+mm$ ]]; then
+  current_size=$(echo $current_size | tr -dc '0-9')
+fi
+
+
+if (( current_size < 0 || current_size > 50 )); then
+  echo -e "\033[31mDie aktuelle Grösse muss zwischen 0 und 50 liegen. \U1F644\033[0m"
+  exit 1
+fi
+
+if (( current_size > stretch_size )); then
+  echo -e "\033[31mEar Stretching Verheilungen sind noch nicht unterstützt. \U1F644\033[0m"
+  exit 1
+fi
+
+if (( current_size == stretch_size )); then
+  echo -e "\033[31mDu möchtest also nichts tun? \U1F644\033[0m"
+  exit 1
 fi
 
 step_time=$((4 * 7 * 24 * 60 * 60))
