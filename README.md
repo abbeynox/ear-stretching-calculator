@@ -6,7 +6,7 @@ Verwendung ohne Gewähr.
 ## Verwendung
 ```bash
 
-./stretching.sh <STRETCH_SIZE> [CURRENT_SIZE]
+./ear-stretching-calc.sh <STRETCH_SIZE> [CURRENT_SIZE]
 ```
 
 Dabei ist <STRETCH_SIZE> die gewünschte Dehnungsgrösse in Millimetern oder als Text mit der Einheit "mm" am Ende, und [CURRENT_SIZE] ist die aktuelle Grösse des Ohrlochs in Millimetern (optional).
